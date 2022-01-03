@@ -15,10 +15,10 @@ const uri = process.env.ATLAS_URI
 app.use(express.json())
 app.use(passport.initialize())
 
-// mongoose.connect(uri);
-// mongoose.connection.once("open", () => {
-//     console.log("MongoDB conncetion established !!")
-// })
+mongoose.connect(uri);
+mongoose.connection.once("open", () => {
+    console.log("MongoDB conncetion established !!")
+})
 
 
 app.listen(4000, () => {
