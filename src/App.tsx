@@ -2,16 +2,15 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './components/Home/Home';
 import ToDoEdior from './components/ToDoEdior/ToDoEdior';
 
 function App() {
+  console.log(process.env.REACT_APP_URL)
   return (
-    <div className="App">
+    <div className="App" style={{marginTop:'10%'}}>
       <BrowserRouter>
       <Routes>
       <Route index element={<ToDoEdior />} />
-      {/* <Route path='/todo' element={<ToDoEdior/>}/> */}
       </Routes>
       </BrowserRouter>
     </div>

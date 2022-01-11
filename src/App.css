@@ -1,6 +1,7 @@
 html {
   min-height: 100vh;
 }
-body {
+body,
+#root {
   min-height: 100vh !important;
 }
