@@ -2,12 +2,13 @@ import React, { KeyboardEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNewItemActionType } from '../../../Redux/To-Do-List/ListAction'
 import Items from './Items'
+import e from './EditorWindow.module.css'
 
 const EditorWindow = () => {
     return (
         <section className='container my-auto' >
             <div className='row'>
-                <div style={{backgroundColor:'#e3e3e3', outline:'2px solid grey'}} className='col-10 col-md-8 mx-auto p-md-3 p-0'>
+                <div className={`col-10 col-md-8 mx-auto p-md-3 p-0 ${e.toDoDiv}`}>
                     <h5 className='text-center'>To-Do List</h5>
                     <div className='w-100'>
                         <Items />

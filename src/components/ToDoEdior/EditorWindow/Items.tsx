@@ -49,7 +49,7 @@ const Items = () => {
                       {...provided.dragHandleProps}
                     >
                       <Edit dispatch={dispatch} item={item} index={index} />
-                      <span onClick={()=>deleteHandler(index)} className='btn btn-sm btn-danger mx-1' style={{float:'right'}}>Delete</span>
+                      <span onClick={()=>deleteHandler(index)} className={`btn btn-sm btn-danger mx-1 ${i.deleteButton}`}>Delete</span>
                     </div>
                   )}
                 </Draggable>
@@ -70,7 +70,7 @@ const Edit = (props:any) =>{
   return(
   <span>
   {item.edit? <input onChange={(e)=>changeHandler(e.target.value)} style={{width:'75%'}} value={item.Name}/>:item.Name }
-  <span style={{float:'right'}} onClick={()=>{item.edit=!item.edit;setEdit(!edit)}} className='btn btn-sm btn-primary mx-1'> {item.edit?'close':'Edit'}</span>
+  <span onClick={()=>{item.edit=!item.edit;setEdit(!edit)}} className={`btn btn-sm btn-primary mx-1 ${i.deleteButton}`}> {item.edit?'close':'Edit'}</span>
   </span>
 
 
