@@ -4,7 +4,7 @@ import { setStateAction } from '../../../Redux/To-Do-List/ListAction'
 import Items from './Items'
 import e from './EditorWindow.module.css'
 import TextareaAutosize from 'react-textarea-autosize';
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 import { inititalStateType } from '../../../Redux/To-Do-List/ListReducer'
 
 const EditorWindow = () => {
@@ -40,7 +40,7 @@ const NewItem = ()=>{
     const dispatch = useDispatch()
     const [newItem, setNewItem] = useState('')
     const handleKeyPress = (e:KeyboardEvent) => {
-        if(e.key=='Enter'){
+        if(e.key==='Enter'){
             onClickHandler()
         }
     }

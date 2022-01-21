@@ -1,4 +1,4 @@
-import React, { LegacyRef, useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from 'react-redux';
 import { changeOrder, setStateAction } from '../../../Redux/To-Do-List/ListAction';
@@ -78,7 +78,7 @@ const Items = () => {
     )
 }
 const Item = (props:any) =>{
-  const {index,item,updateHandler,deleteHandler,provided} = props
+  const {item,updateHandler,deleteHandler,provided} = props
   const [edit, setEdit] = useState(false)
   const [value, setValue] = useState(item.Name)
   const textAreaRef= useRef<HTMLTextAreaElement>(null)
