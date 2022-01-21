@@ -1,32 +1,88 @@
 import express from 'express';
 import cors from 'cors';
-import { hashSync, compareSync } from 'bcrypt';
-import mongoose from 'mongoose';
+import mysql from 'mysql'
 import env from "dotenv";
-import passport from 'passport'
-import jwt from 'jsonwebtoken'
-import userRoutes from './routes/userRoutes/userRoutes.js'
 
 
 const app = express();
 app.use(cors());
-app.use(passport.initialize())
 app.use(express.json())
 env.config({ path: ".env" })
-const uri = process.env.ATLAS_URI
 
-app.use('/user', userRoutes)
-
-mongoose.connect(uri);
-mongoose.connection.once("open", () => {
-    console.log("MongoDB conncetion established !!")
+var connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: '',
+    database: 'sampleDB',
 })
 
-app.post('/save', (req, res) => {
-    console.log(req.body)
-    res.send('Saved')
+connection.connect((error) => {
+    if (error) {
+        console.log(error)
+    } else {
+        console.log('Connected')
+    }
+})
+// Read List
+app.get('/list', (req, res) => {
+    connection.query('SELECT * FROM to_do_list', (error, rows, fields) => {
+        if (error) { console.log(error.message); res.status(500).send(error.message) }
+        else {
+            res.status(200).json(rows)
+        }
+    })
 })
 
+// Create List-Item
+app.post('/list', (req, res) => {
+    const itemName = req.body.itemName
+    console.log(itemName)
+    connection.query(`INSERT INTO TO_DO_LIST (id,Name) VALUES(UUID(),?)`, [itemName], (error, rows, fields) => {
+        if (error) { console.log(error.message); res.status(500).send(error.message) }
+        else {
+            connection.query('SELECT * FROM to_do_list', (error, rows, fields) => {
+                if (error) { console.log(error.message); res.status(500).send(error.message) }
+                else {
+                    res.status(201).send(rows)
+                }
+            })
+        }
+    })
+})
+// Update List-Item
+app.put('/list/:id', (req, res) => {
+    const newName = req.body.newName
+    console.log(newName);
+
+    const id = req.params.id
+    connection.query('UPDATE TO_DO_LIST SET NAME=? WHERE ID=?', [newName, id], (error, rows, fields) => {
+        if (error) { console.log(error.message); res.status(500).send(error.message) }
+        else {
+            connection.query('SELECT * FROM to_do_list', (error, rows, fields) => {
+                if (error) { console.log(error.message); res.status(500).send(error.message) }
+                else {
+                    res.status(200).send(rows)
+                }
+            })
+        }
+    })
+})
+// Delete List-Item
+app.delete('/list/:id', (req, res) => {
+    const id = req.params.id
+    connection.query('DELETE FROM TO_DO_LIST WHERE ID=?', [id], (error, rows, fields) => {
+        if (error) console.log(error.message)
+        else {
+            connection.query('SELECT * FROM to_do_list', (error, rows, fields) => {
+                if (error) { console.log(error.message); res.status(500).send(error.message) }
+                else {
+                    res.status(200).send(rows)
+                }
+            })
+        }
+    })
+})
 app.listen(4000, () => {
     console.log("Server started on port - 4000 !! -----------------------------------------------------------------")
 })

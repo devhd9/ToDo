@@ -1,4 +1,11 @@
+.mainSection {
+  min-width: 400px;
+  max-width: 1200px;
+}
 .toDoDiv {
-  background-color: "#e3e3e3";
-  outline: "2px solid grey";
+  background-color: #e3e3e3;
+  outline: 2px solid grey;
+}
+.inputField:focus {
+  min-height: 2rem;
 }

@@ -1,6 +1,13 @@
-POST http://localhost:4000/user/register HTTP/1.1
+DELETE http://localhost:1337/list/ead749ef-7797-11ec-9a80-74d02b05f0ad HTTP/1.1
+content-type: application/json
+
+###
+PUT http://localhost:1337/list/65ab8473-7798-11ec-9a80-74d02b05f0ad HTTP/1.1
 content-type: application/json
 
 {
-    "id":"hetdesai068@gmail.com"
+    "newName":"It happeneeeeeeeeeeeeeeeeeddddddddddddd"
 }
+###
+GET http://localhost:1337/list HTTP/1.1
+content-type: application/json
