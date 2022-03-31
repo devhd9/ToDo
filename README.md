@@ -12,7 +12,7 @@
 **2. Server**
 - Node Js
 - Express Js
-- Mongoose
+- Mysql
 
 **3. Database Management System**
 - MySQL
